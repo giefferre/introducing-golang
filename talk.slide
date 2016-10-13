@@ -347,5 +347,5 @@ It is a native golang solution, available as a package, to run slides and code w
 
 Check it out at [[https://godoc.org/golang.org/x/tools/present]]
 
-[[http://go-talks.appspot.com/bitbucket.org/giefferre/introducing-golang/talk.slide]]
+[[http://go-talks.appspot.com/github.com/giefferre/introducing-golang/talk.slide]]
 
