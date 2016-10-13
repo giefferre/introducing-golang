@@ -1,0 +1,351 @@
+Introducing golang to web developers
+A talk for Palermo PHP User Group
+13 Oct 2016
+
+Gianfranco Reppucci
+Software developer, Qurami
+gianfranco.reppucci@qurami.com
+http://qurami.com
+@giefferre
+
+
+* Evolution is a fact
+
+.image img/evolution.jpg _ 800
+
+: Chi si sente lo stesso sviluppatore di 5 o 10 anni fa?
+: Abbiamo tutti imparato qualcosa, modificato delle tecniche, corretto alcuni comportamenti
+: L'evoluzione, il cambiamento, fanno parte del nostro DNA di sviluppatore
+
+
+* Embrace change
+
+Start using something modern!
+
+.image img/gopher_yellow.png 300 _
+
+.caption *Go*is*an*open*source*programming*language*
+.caption *that*makes*it*easy*to*build*simple,*reliable*and*efficient*software.*
+.caption quote from golang.org
+
+
+* History
+
+- *2007*: first experiment
+- *2009*: public launch
+- *2011*: integration in Google App Engine
+- *2012*: release of version 1
+- *2015*: native support for mobile devices _(ver._>=_1.5)_
+- *2016*: transparent HTTP2 support and more _(ver._>=_1.6)_
+
+
+* Key features
+
+- Strongly typed language featuring advanced tools
+- Absolutely genuine: syntax and environments are similar to dynamic languages
+- Performance driven
+- Open sourced 👍
+
+
+* Batteries included
+
+- Lightweight runtime components (garbage collector, scheduler, etc.)
+- Plenty of standard libraries
+- Complete documentation
+- Built-in formatter
+- Native linter available
+
+
+* Formatter
+
+From this...
+
+.image img/code_mess.png 200 _
+
+To this :)
+
+.image img/code_clean.png 200 _
+
+
+* The "Hello World" thing
+
+.play code/hello_palermo.go
+
+: _package_ determines the namespace
+: it CANNOT be omitted
+: if you are not writing a package, it shall be *main*
+
+
+* Magic imports
+
+Inline:
+
+    import "fmt"
+
+
+Grouped:
+
+    import (
+        // native packages
+        "fmt" 
+        "net/http"
+
+        // remote packages!
+        "code.google.com/p/goconf/conf"
+        "github.com/garyburd/redigo/redis"
+    )
+
+: _import_ loads one or more packages
+: packages could be imported even remotely, from Googlecode or Github
+
+
+* Variables and scope
+
+This:
+
+.code code/variables.go /START2/,/STOP2/
+
+Is equivalent to:
+
+.code code/variables.go /START1/,/STOP1/
+
+Check it out:
+
+.play code/variables.go /START3/,/STOP3/
+
+
+* Variables and scope (cont.)
+
+Be aware of the scope!
+
+.play code/scope.go /START1/,/STOP1/
+
+
+* Methods
+
+Methods are declared with the keyword *func* as follows:
+
+.play code/methods.go /START1/,/STOP1/
+
+
+* Error handling
+
+There is no exception, only errors
+
+    file, err := os.Open(filePath)
+    if err != nil {
+        return err
+    }
+
+    codeUsing(file)
+
+If you forget to handle and error, the application will probably crash!
+
+
+* Is golang Object-Oriented?
+
+* Yes, but not the usual way
+
+While Java or C are about _inheritance_, Go is about _composition_.
+
+In fact:
+- No class inheritance
+- No method or operator overloading
+- No circular dependencies among packages
+
+* 
+
+.image img/what.jpg 520 _
+
+
+* The Person struct
+
+Let's define the struct _Person_
+
+.code code/structs.go /START1/,/STOP1/
+
+With its own methods...
+
+.code code/structs.go /START2/,/STOP2/
+
+
+* The Person struct (cont.)
+
+And of course a constructor method:
+
+.code code/structs.go /START3/,/STOP3/
+
+
+* The Person struct (cont.)
+
+We'll use the Person struct as follows:
+
+.code code/structs.go /START7/,/STOP7/
+.code code/structs.go /START8/,/STOP8/
+
+
+* The Student struct
+
+Let's *compose* a new struct, _Student_, by using the previous one:
+
+.code code/structs.go /START4/,/STOP4/
+.code code/structs.go /START5/,/STOP5/
+
+
+* The Student struct (cont.)
+
+And constructor as usual:
+
+.code code/structs.go /START6/,/STOP6/
+
+
+* Putting it all together
+
+As simple as that:
+
+.play code/structs.go /START9/,/STOP9/
+
+
+* 
+
+.image img/tennis.gif 520 _
+
+
+* Goroutines
+
+A _goroutine_ is a lightweight thread.
+
+To launch a goroutine, use the *go* keyword before a method.
+
+.play code/goroutines.go /START1/,/STOP1/
+
+
+* Goroutines (cont.)
+
+Goroutines can also use anonymous methods
+
+.play code/goroutines_anon.go /START1/,/STOP1/
+
+
+* Channels
+
+Channels allow you to pass data between running goroutines.
+
+They can be _buffered_ or _unbuffered_.
+
+You can build a channel from any kind of data structure!
+
+    ch := make(chan int)
+
+    // insert a value into the channel
+    ch <- 5
+
+    // read data from the channel
+    var readValue int
+    readValue = <-ch
+
+    // readValue is 5
+
+
+* The beacon
+
+.play code/channels.go /START1/,/STOP1/
+
+
+* Select
+
+The _select_ statement is like a switch statement, but it selects over channel operations using a first-come, first-served logic.
+
+It is useful to implement synchronization!
+
+
+* The beacon, using select
+
+.play code/select.go /START1/,/STOP1/
+
+
+* What about web development?
+
+
+* Built-in HTTP server
+
+You can build your own HTTP server within seconds:
+
+.play code/http.go /START1/,/STOP1/
+
+
+* Gorilla
+
+[[http://gorillatoolkit.org/][Gorilla]] is a web toolkit for the Go programming language.
+
+.code code/gorilla.go /START1/,/STOP1/
+
+
+* Gorilla (cont.)
+
+.play code/gorilla.go /START2/,/STOP2/
+
+
+* 
+
+.image img/mind_blown.gif 520 _
+
+: there's more and more to show
+: including templating, HTTP methods, managing POST and PUT data, etc
+
+
+* Conclusions
+
+
+* 👍 PROs
+
+- Explicit is better than implicit: Go code is _really_readable_
+- Concurrency is super-easy
+- Your application ships within a single binary file - no extra dependencies!
+- Your application runs on (almost) any platform
+- You are not adopting just a language: you are adopting a whole new set of tools
+
+
+* 👀 Warnings
+
+- Be aware of error handling
+- Sometimes you'll write real "low-level" code
+
+
+* 👎 CONs
+
+No generics, sorry!
+
+If you need to encode/decode objects, either:
+- use JSON / XML encoding
+- use _reflection_ and _type_assertion_
+
+(or build your own decoder!)
+
+
+* 👎 CONs (cont.)
+
+Package versioning is not handled at all :(
+
+An update of a remote package could break compatibility!
+
+Your application will not build anymore
+
+
+* From an entrepreneur's point of view
+
+- The language is born and supported from Google
+- [[https://github.com/golang/go/wiki/GoUsers][The list of Golang users is growing up extremely fast]], you're not alone
+- The learning curve is quite high, but you'll have better programmers
+
+
+* Save this keynote to your bookmarks
+
+This keynote is made with the *present* tool!
+
+It is a native golang solution, available as a package, to run slides and code within your browser.
+
+Check it out at [[https://godoc.org/golang.org/x/tools/present]]
+
+[[http://go-talks.appspot.com/bitbucket.org/giefferre/introducing-golang/talk.slide]]
+
