@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	recipient := "Palermo PHP User Group"
+	recipient := "Associazione Bytemotion"
 
 	fmt.Print("Hello, ")
 	fmt.Println(recipient)

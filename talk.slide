@@ -1,9 +1,7 @@
-Introducing golang to web developers
-A talk for Palermo PHP User Group
-13 Oct 2016
+Discovering golang
 
 Gianfranco Reppucci
-Software developer, Qurami
+Full-stack software engineer, Qurami
 gianfranco.reppucci@qurami.com
 http://qurami.com
 @giefferre
@@ -37,6 +35,7 @@ Start using something modern!
 - *2012*: release of version 1
 - *2015*: native support for mobile devices _(ver._>=_1.5)_
 - *2016*: transparent HTTP2 support and more _(ver._>=_1.6)_
+- *2018*: type aliases, cache for tests and packages (ver._>=1.10)
 
 
 * Key features
@@ -69,7 +68,7 @@ To this :)
 
 * The "Hello World" thing
 
-.play code/hello_palermo.go
+.play code/hello.go
 
 : _package_ determines the namespace
 : it CANNOT be omitted
@@ -309,12 +308,12 @@ You can build your own HTTP server within seconds:
 * 👀 Warnings
 
 - Be aware of error handling
-- Sometimes you'll write real "low-level" code
+- Sometimes you'll write real "low-level" code, but it's OK if you come from C
 
 
 * 👎 CONs
 
-No generics, sorry!
+No generics, sorry! (is it a con?)
 
 If you need to encode/decode objects, either:
 - use JSON / XML encoding
@@ -325,7 +324,7 @@ If you need to encode/decode objects, either:
 
 * 👎 CONs (cont.)
 
-Package versioning is not handled at all :(
+Package versioning is handled weirdly :(
 
 An update of a remote package could break compatibility!
 
